@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import re
 import json
 import time
 import requests
