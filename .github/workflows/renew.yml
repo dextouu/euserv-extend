@@ -2,7 +2,7 @@ name: Renew
 
 on:
   schedule:
-    - cron: "27 23 18 * *"
+    - cron: "27 21 18 * *"
 
 jobs:
   build:
@@ -20,4 +20,4 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
-        run: python main.py
+        run: python euserv.py
