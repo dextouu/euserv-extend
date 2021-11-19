@@ -21,21 +21,22 @@ def login(username: str, password: str) -> (str, requests.session):
                       "Chrome/93.0.4577.82 Safari/537.36",
         "origin": "https://www.euserv.com"
     }
+    url = "https://support.euserv.com/index.iphp"
+    session = requests.Session()
+    sess = session.get(url, headers=headers)
+    sess_id = re.findall("PHPSESSID=(\\w{10,100});", str(sess.headers))[0]
     login_data = {
         "email": username,
         "password": password,
         "form_selected_language": "en",
         "Submit": "Login",
-        "subaction": "login"
+        "subaction": "login",
+        "sess_id": sess_id
     }
-    url = "https://support.euserv.com/index.iphp"
-    session = requests.Session()
     f = session.post(url, headers=headers, data=login_data)
     f.raise_for_status()
     if f.text.find('Hello') == -1:
         return '-1', session
-    # print(f.request.url)
-    sess_id = f.request.url[f.request.url.index('=') + 1:len(f.request.url)]
     return sess_id, session
 
 
