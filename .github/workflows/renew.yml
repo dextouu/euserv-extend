@@ -3,6 +3,7 @@ name: Renew
 on:
   schedule:
     - cron: "27 21 18 * *"
+  workflow_dispatch:
 
 jobs:
   build:
